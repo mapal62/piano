@@ -54,9 +54,10 @@
             top: calc( var(--unit) * 15.5);
         }
         
-        @media (min-width: 730px) {
+        @media screen and (min-width: 730px),
+        screen and (min-width: 730px) and (orientation: landscape) {
             body {
-                --unit: calc( 90vw / 16);
+                --unit: calc( 70vw / 16);
                 font-size: 0;
             }
             .row {
