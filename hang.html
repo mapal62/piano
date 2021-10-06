@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>hang</title>
+  </head>
+  <body>
+    <h1>csak szóljon!</h1>
+
+
+    <script>
+      console.log('Elindult');
+
+      document.addEventListener("keydown", () => {
+        console.log(this);
+              let hertz = 391.995435981749294;
+        playTone(hertz);
+      });
+      let audioContext = new (window.AudioContext || window.webkit.AudioContext)();
+
+
+mainGainNode = audioContext.createGain();
+mainGainNode.connect(audioContext.destination);
+mainGainNode.gain.value = 0.4;
+
+function playTone(freq) {
+      let osc = audioContext.createOscillator();
+      osc.connect(mainGainNode);
+      osc.type = "sawtooth";
+      osc.frequency.value = freq;
+      osc.start();
+    setTimeout( osc.stop(), 2000);
+      }
+
+
+      //this will work!
+var context = new AudioContext(),
+    oscillator;
+
+function playOscillator(startTime, endTime) {
+    oscillator = context.createOscillator();
+    oscillator.connect(context.destination);
+    oscillator.start(startTime);
+    oscillator.stop(endTime);
+}
+
+playOscillator(context.currentTime, context.currentTime + 0.5);
+playOscillator(context.currentTime + 1, context.currentTime + 1.5);
+    </script>
+  </body>
+</html>

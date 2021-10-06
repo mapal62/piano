@@ -20,6 +20,10 @@
             background: ivory;
         }
         
+        .ivory.keydown {
+            box-shadow: inset 3px 0 10px 4px;
+        }
+        
         .ebony {
             width: calc( var(--unit) * 6);
             height: var(--unit);
@@ -27,37 +31,41 @@
             background: #282C34;
             border-radius: 5px 0 0 5px;
             box-shadow: 0 0 2px 2px;
-            right: 0;
+            right: -2px;
         }
         
-        .cisz {
+        .ebony.keydown {
+            box-shadow: inset 1px 0 2px 1px ivory;
+        }
+        
+        #cisz {
             top: calc( var(--unit) * 1.5);
         }
         
-        .disz {
+        #disz {
             top: calc( var(--unit) * 3.5);
         }
         
-        .fisz {
+        #fisz {
             top: calc( var(--unit) * 7.5);
         }
         
-        .gisz {
+        #gisz {
             top: calc( var(--unit) * 9.5);
         }
         
-        .be {
+        #be {
             top: calc( var(--unit) * 11.5);
         }
         
-        .ccisz {
+        #ccisz {
             top: calc( var(--unit) * 15.5);
         }
         
         @media screen and (min-width: 730px),
         screen and (orientation: landscape) {
             body {
-                --unit: calc( 70vw / 16);
+                --unit: calc( 80vw / 16);
                 font-size: 0;
             }
             .row {
@@ -73,24 +81,29 @@
                 width: var(--unit);
                 position: absolute;
                 border-radius: 0 0 5px 5px;
-                top: 0;
             }
-            .cisz {
+            #cisz {
                 left: calc( var(--unit) * 1.5);
+                top: -5px;
             }
-            .disz {
+            #disz {
                 left: calc( var(--unit) * 3.5);
+                top: -5px;
             }
-            .fisz {
+            #fisz {
                 left: calc( var(--unit) * 7.5);
+                top: -5px;
             }
-            .gisz {
+            #gisz {
                 left: calc( var(--unit) * 9.5);
+                top: -5px;
             }
-            .be {
+            #be {
                 left: calc( var(--unit) * 11.5);
+                top: -5px;
             }
-            .ccisz {
+            #ccisz {
                 left: calc( var(--unit) * 15.5);
+                top: -5px;
             }
         }
