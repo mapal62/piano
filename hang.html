@@ -1,51 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>hang</title>
-  </head>
-  <body>
-    <h1>csak szóljon!</h1>
 
+<head>
+  <meta charset="utf-8">
+  <title>hang</title>
+  <style>
+    div {
+      /* width: 80px;
+  height: 80px; */
+      border: 5px solid grey;
+      /*max-width: 600px;*/
+      /* background-image: url('https://24.p3k.hu/app/uploads/sites/11/2019/09/dunakanyar-e1567518787853.jpg');
+background-size: cover; */
+    }
 
-    <script>
-      console.log('Elindult');
+    img {
+      width: 50%;
+      height: 50vh;
+    }
+  </style>
+</head>
 
-      document.addEventListener("keydown", () => {
-        console.log(this);
-              let hertz = 391.995435981749294;
-        playTone(hertz);
-      });
-      let audioContext = new (window.AudioContext || window.webkit.AudioContext)();
+<body>
+  <h1>csak szóljon!</h1>
+  <button>Nyomj meg</button>
+  <div>
+    <img src="https://24.p3k.hu/app/uploads/sites/11/2019/09/dunakanyar-e1567518787853.jpg" alt="">
+  </div>
 
+  <script>
+    console.log('Elindult');
+    let audioContext = new(window.AudioContext || window.webkit.AudioContext)();
+    let hertz = 391.995435981749294;
+    let currentOsc;
+    let gomb = document.querySelector('button');
+    gomb.addEventListener('mousedown', () => {
+      currentOsc = playTone(hertz);
+    })
 
-mainGainNode = audioContext.createGain();
-mainGainNode.connect(audioContext.destination);
-mainGainNode.gain.value = 0.4;
+    gomb.addEventListener('mouseup', () => {
+      currentOsc.stop();
+      delete currentOsc;
+    })
 
-function playTone(freq) {
-      let osc = audioContext.createOscillator();
-      osc.connect(mainGainNode);
+    function playTone(freq) {
+let osc = audioContext.createOscillator();
+      osc.connect(audioContext.destination);
       osc.type = "sawtooth";
       osc.frequency.value = freq;
       osc.start();
-    setTimeout( osc.stop(), 2000);
-      }
+      return osc;
+    }
 
 
-      //this will work!
-var context = new AudioContext(),
-    oscillator;
+    //this will work!
+    // var context = new AudioContext(),
+    //     oscillator;
+    //
+    // function playOscillator(startTime, endTime) {
+    //     oscillator = context.createOscillator();
+    //     oscillator.connect(context.destination);
+    //     oscillator.start(startTime);
+    //     oscillator.stop(endTime);
+    // }
+    //
+    // playOscillator(context.currentTime, context.currentTime + 0.5);
+    // playOscillator(context.currentTime + 1, context.currentTime + 1.5);
+  </script>
+</body>
 
-function playOscillator(startTime, endTime) {
-    oscillator = context.createOscillator();
-    oscillator.connect(context.destination);
-    oscillator.start(startTime);
-    oscillator.stop(endTime);
-}
-
-playOscillator(context.currentTime, context.currentTime + 0.5);
-playOscillator(context.currentTime + 1, context.currentTime + 1.5);
-    </script>
-  </body>
 </html>
