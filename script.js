@@ -44,6 +44,10 @@ let keyboard = document.querySelectorAll('.key');
 keyboard.forEach(
     whichOne => {
         whichOne.addEventListener('mousedown', keyPressed);
+        whichOne.addEventListener('touchstart', keyPressed);
         whichOne.addEventListener('mouseup', keyReleased);
+        whichOne.addEventListener('mouseleave', keyReleased);
+        whichOne.addEventListener('touchend', keyReleased);
+
     }
 );
