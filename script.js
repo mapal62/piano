@@ -2,6 +2,8 @@ console.log("JS started");
 let hangok = {};
 let currentOsc;
 let audioContext = new(window.AudioContext || window.webkit.AudioContext)();
+Synth instanceof AudioSynth;
+let builtIn = false;
 
 hangok.c = 261.625565300598634;
 hangok.cisz = 277.182630976872096;
@@ -25,6 +27,17 @@ function keyPressed(event) {
     currentOsc = startSound(baseHz);
 }
 
+function instrumental(event) {
+    event.target.classList.add("keydown");
+    let hang = event.target.getAttribute('data-hang');
+    let whatToPlay = hang.split(' ');
+    Synth.play('piano', whatToPlay[0], whatToPlay[1], 1.5);
+    setTimeout(() => {
+        event.target.classList.remove("keydown");
+    }, 300);
+
+}
+
 function startSound(freq) {
     let osc = audioContext.createOscillator();
     osc.connect(audioContext.destination);
@@ -43,11 +56,20 @@ function keyReleased(event) {
 let keyboard = document.querySelectorAll('.key');
 keyboard.forEach(
     whichOne => {
-        whichOne.addEventListener('mousedown', keyPressed);
-        whichOne.addEventListener('touchstart', keyPressed);
-        whichOne.addEventListener('mouseup', keyReleased);
-        whichOne.addEventListener('mouseleave', keyReleased);
-        whichOne.addEventListener('touchend', keyReleased);
-
+        if (builtIn) {
+            whichOne.addEventListener('mousedown', keyPressed);
+            whichOne.addEventListener('touchstart', keyPressed);
+            whichOne.addEventListener('mouseup', keyReleased);
+            whichOne.addEventListener('mouseleave', keyReleased);
+            whichOne.addEventListener('touchend', keyReleased);
+        } else {
+            whichOne.addEventListener('mousedown', instrumental);
+            whichOne.addEventListener('touchstart', instrumental);
+        }
     }
 );
+document.querySelector('i').addEventListener('click', function() {
+    console.log('CLICKED');
+
+    document.querySelector('#cover').hidden = true;
+})
